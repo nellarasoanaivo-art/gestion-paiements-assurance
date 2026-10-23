@@ -483,3 +483,34 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
   .modal { box-shadow: none; width: 100%; max-height: none; overflow: visible; border-radius: 0; }
   .modal-entete, .modal-actions { display: none; }
 }
+/* ---------- Ajustements mobile ---------- */
+@media (max-width: 720px) {
+  html { font-size: 15px; }
+  input, select, textarea { font-size: 16px; }
+  .contenu { padding: .8rem; }
+  .carte { padding: .85rem; margin-bottom: 1rem; }
+  .entete-page { margin-bottom: 1rem; }
+  .entete-page h2 { font-size: 1.4rem; }
+  .titre-carte { font-size: 1.1rem; }
+  .barre-haute { padding: .6rem .8rem; }
+  .avatar { width: 40px; height: 40px; }
+
+  .grille-stats { gap: .8rem; margin-bottom: 1rem; }
+  .grille-2, .grille-2.egale { gap: .8rem; }
+  .stat { padding: .9rem 1rem; }
+  .stat-icone { width: 46px; height: 46px; }
+  .stat-valeur { font-size: 1.25rem; }
+
+  .carte:has(.graphe) { overflow-x: auto; }
+  .graphe { min-width: 560px; }
+  .legende-graphe { gap: .8rem; font-size: .88rem; }
+  .anneau { flex-direction: column; }
+  .legende { min-width: 0; width: 100%; }
+  .barres-h-entete { flex-direction: column; gap: 0; }
+
+  .tableau-conteneur td { font-size: .95rem; padding: .5rem .7rem; }
+  .tableau-conteneur td::before { max-width: 45%; }
+  .cases-types { grid-template-columns: 1fr; }
+  .resume-calcul div { flex-direction: column; gap: .1rem; }
+  .onglets button { padding: .5rem .8rem; }
+}
