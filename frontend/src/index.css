@@ -514,3 +514,40 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
   .resume-calcul div { flex-direction: column; gap: .1rem; }
   .onglets button { padding: .5rem .8rem; }
 }
+
+/* ===== Avatar seul (initiales) ===== */
+.barre-droite { margin-left: auto; display: flex; align-items: center; gap: .8rem; }
+.avatar { width: 44px; height: 44px; font-size: 1rem; cursor: default; }
+
+/* ===== Menu hamburger : tablettes et téléphones ===== */
+button.btn-menu { display: none; }
+
+@media (max-width: 1024px) {
+  .app { display: block; }
+
+  .menu-lateral {
+    position: fixed; top: 0; left: 0; bottom: 0; height: 100%;
+    width: min(300px, 85vw); max-width: 300px;
+    transform: translateX(-105%); transition: transform .25s ease;
+    z-index: 1000; overflow-y: auto; box-shadow: none;
+  }
+  .menu-lateral.ouvert { transform: translateX(0); box-shadow: 8px 0 30px rgba(0, 0, 0, .45); }
+
+  .voile { display: block; position: fixed; inset: 0; z-index: 900; background: rgba(15, 23, 42, .55); }
+  body.menu-ouvert { overflow: hidden; }
+
+  button.btn-menu {
+    display: flex; align-items: center; justify-content: center;
+    width: 46px; height: 46px; padding: 0; flex-shrink: 0;
+    background: #ffffff; color: var(--texte); border: 1.5px solid #cbd5e1; border-radius: 10px;
+  }
+
+  .zone-principale { width: 100%; min-width: 0; }
+  .barre-haute { position: sticky; top: 0; z-index: 50; padding: .6rem .9rem; }
+  .contenu { padding: 1rem; }
+}
+
+@media (max-width: 720px) {
+  .contenu { padding: .8rem; }
+  .avatar { width: 40px; height: 40px; }
+}

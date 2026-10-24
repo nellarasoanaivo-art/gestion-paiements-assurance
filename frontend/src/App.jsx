@@ -150,13 +150,10 @@ export default function App() {
           </button>
 
           <div className="barre-droite">
-            <div className="utilisateur-connecte">
-              <span className="avatar">{initiales}</span>
-              <span className="utilisateur-texte">
-                <strong>{utilisateur.prenom} {utilisateur.nom}</strong>
-                <small>{libelle(utilisateur.role)}</small>
-              </span>
-            </div>
+            <span className="avatar"
+                  title={utilisateur.prenom + " " + utilisateur.nom + " (" + libelle(utilisateur.role) + ")"}>
+              {initiales}
+            </span>
             <button className="btn-deconnexion-icone" onClick={deconnexion}
                     title="Se déconnecter" aria-label="Se déconnecter">
               <Icone nom="deconnexion" taille={22} />
