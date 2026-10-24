@@ -99,41 +99,7 @@ const ligneY = (t, col) =>
 const classeCle = (cle) =>
   cle.includes("PK") ? "PK" : cle.includes("FK") ? "FK" : cle.includes("UQ") ? "UQ" : "";
 
-// ---------- Vue « liste » (idéale sur téléphone) ----------
-function ListeTables() {
-  return (
-    <div className="mpd-grille">
-      {TABLES.map((t) => (
-        <article className="mpd-table" key={t.nom}>
-          <header style={{ background: GROUPES[t.groupe].couleur }}>
-            <h4>{t.nom}</h4>
-            <span>{GROUPES[t.groupe].nom}</span>
-          </header>
-          <ul>
-            {t.colonnes.map(([nom, type, cle]) => {
-              const ref = RELATIONS.find((r) => r.de === t.nom && r.col === nom);
-              return (
-                <li key={nom}>
-                  <span className="col-nom">{nom}</span>
-                  <span className="col-type">
-                    {type}
-                    {cle.split(",").filter(Boolean).map((k) => (
-                      <b key={k} className={"cle cle-" + k}>{k}</b>
-                    ))}
-                  </span>
-                  {ref && <span className="col-ref">→ {ref.vers}.{ref.cible}</span>}
-                </li>
-              );
-            })}
-          </ul>
-        </article>
-      ))}
-    </div>
-  );
-}
-
-// ---------- Vue « schéma » ----------
-function Diagramme() {
+export default function Apropos() {
   const [actif, setActif] = useState(null);
   const parNom = useMemo(() => Object.fromEntries(TABLES.map((t) => [t.nom, t])), []);
 
@@ -180,69 +146,6 @@ function Diagramme() {
   });
 
   return (
-    <div className="carte">
-      <div className="mpd-legende">
-        {Object.values(GROUPES).map((g) => (
-          <span key={g.nom}><i className="pastille-couleur" style={{ background: g.couleur }} />{g.nom}</span>
-        ))}
-        <span><b className="cle cle-PK">PK</b> clé primaire</span>
-        <span><b className="cle cle-FK">FK</b> clé étrangère</span>
-        <span><b className="cle cle-UQ">UQ</b> valeur unique</span>
-        <span><b className="cle cle-FK">N</b> / <b className="cle cle-FK">1</b> cardinalités</span>
-      </div>
-      <p className="aide">
-        Survolez ou touchez une table pour mettre ses relations en évidence.
-        <span className="mpd-aide-mobile"> Faites glisser horizontalement pour voir tout le schéma.</span>
-      </p>
-
-      <div className="mpd-defilement">
-        <svg viewBox={`0 0 ${LARGEUR} ${HAUTEUR}`} className="mpd-svg" role="img"
-             aria-label="Schéma du modèle physique de données">
-          <rect width={LARGEUR} height={HAUTEUR} fill="transparent" onClick={() => setActif(null)} />
-          {liens}
-          {TABLES.map((t) => {
-            const h = hauteurTable(t);
-            const couleur = GROUPES[t.groupe].couleur;
-            const pale = voisines && !voisines.has(t.nom);
-            return (
-              <g key={t.nom} transform={`translate(${t.x} ${t.y})`}
-                 className={"mpd-t" + (pale ? " pale" : "") + (actif === t.nom ? " choisie" : "")}
-                 onPointerEnter={(e) => e.pointerType === "mouse" && setActif(t.nom)}
-                 onPointerLeave={(e) => e.pointerType === "mouse" && setActif(null)}
-                 onClick={(e) => { e.stopPropagation(); setActif(t.nom); }}>
-                <rect className="mpd-boite" width={L} height={h} rx="9" />
-                <rect width={L} height={H_ENTETE} rx="9" fill={couleur} />
-                <rect y={H_ENTETE - 9} width={L} height="9" fill={couleur} />
-                <text className="mpd-nom" x="14" y="22">{t.nom}</text>
-                {t.colonnes.map(([nom, type, cle], i) => {
-                  const y = H_ENTETE + i * H_LIGNE;
-                  const k = classeCle(cle);
-                  return (
-                    <g key={nom}>
-                      {i > 0 && <line className="mpd-sep" x1="8" x2={L - 8} y1={y} y2={y} />}
-                      {k && <text className={"mpd-cle s-" + k} x="12" y={y + 15}>{k}</text>}
-                      <text className="mpd-col" x="36" y={y + 15}>{nom}</text>
-                      <text className="mpd-type" x={L - 12} y={y + 15} textAnchor="end">{type}</text>
-                    </g>
-                  );
-                })}
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-// ---------- Page ----------
-export default function Apropos() {
-  // Sur téléphone, la liste est plus lisible que le schéma
-  const [vue, setVue] = useState(() =>
-    window.matchMedia("(max-width: 720px)").matches ? "liste" : "diagramme"
-  );
-
-  return (
     <>
       <div className="entete-page">
         <div>
@@ -251,18 +154,58 @@ export default function Apropos() {
         </div>
       </div>
 
-      <div className="onglets" role="tablist">
-        <button role="tab" aria-selected={vue === "liste"}
-                className={vue === "liste" ? "actif" : ""} onClick={() => setVue("liste")}>
-          Liste des tables
-        </button>
-        <button role="tab" aria-selected={vue === "diagramme"}
-                className={vue === "diagramme" ? "actif" : ""} onClick={() => setVue("diagramme")}>
-          Schéma
-        </button>
-      </div>
+      <div className="carte">
+        <div className="mpd-legende">
+          {Object.values(GROUPES).map((g) => (
+            <span key={g.nom}><i className="pastille-couleur" style={{ background: g.couleur }} />{g.nom}</span>
+          ))}
+          <span><b className="cle cle-PK">PK</b> clé primaire</span>
+          <span><b className="cle cle-FK">FK</b> clé étrangère</span>
+          <span><b className="cle cle-UQ">UQ</b> valeur unique</span>
+          <span><b className="cle cle-FK">N</b> / <b className="cle cle-FK">1</b> cardinalités</span>
+        </div>
+        <p className="aide">
+          Survolez ou touchez une table pour mettre ses relations en évidence.
+          <span className="mpd-aide-mobile"> Faites glisser horizontalement pour voir tout le schéma.</span>
+        </p>
 
-      {vue === "diagramme" ? <Diagramme /> : <div className="carte"><ListeTables /></div>}
+        <div className="mpd-defilement">
+          <svg viewBox={`0 0 ${LARGEUR} ${HAUTEUR}`} className="mpd-svg" role="img"
+               aria-label="Schéma du modèle physique de données">
+            <rect width={LARGEUR} height={HAUTEUR} fill="transparent" onClick={() => setActif(null)} />
+            {liens}
+            {TABLES.map((t) => {
+              const h = hauteurTable(t);
+              const couleur = GROUPES[t.groupe].couleur;
+              const pale = voisines && !voisines.has(t.nom);
+              return (
+                <g key={t.nom} transform={`translate(${t.x} ${t.y})`}
+                   className={"mpd-t" + (pale ? " pale" : "") + (actif === t.nom ? " choisie" : "")}
+                   onPointerEnter={(e) => e.pointerType === "mouse" && setActif(t.nom)}
+                   onPointerLeave={(e) => e.pointerType === "mouse" && setActif(null)}
+                   onClick={(e) => { e.stopPropagation(); setActif(t.nom); }}>
+                  <rect className="mpd-boite" width={L} height={h} rx="9" />
+                  <rect width={L} height={H_ENTETE} rx="9" fill={couleur} />
+                  <rect y={H_ENTETE - 9} width={L} height="9" fill={couleur} />
+                  <text className="mpd-nom" x="14" y="22">{t.nom}</text>
+                  {t.colonnes.map(([nom, type, cle], i) => {
+                    const y = H_ENTETE + i * H_LIGNE;
+                    const k = classeCle(cle);
+                    return (
+                      <g key={nom}>
+                        {i > 0 && <line className="mpd-sep" x1="8" x2={L - 8} y1={y} y2={y} />}
+                        {k && <text className={"mpd-cle s-" + k} x="12" y={y + 15}>{k}</text>}
+                        <text className="mpd-col" x="36" y={y + 15}>{nom}</text>
+                        <text className="mpd-type" x={L - 12} y={y + 15} textAnchor="end">{type}</text>
+                      </g>
+                    );
+                  })}
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+      </div>
     </>
   );
 }
