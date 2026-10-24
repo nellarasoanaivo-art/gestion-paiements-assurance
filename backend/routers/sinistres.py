@@ -33,7 +33,7 @@ def declarer_sinistre(data: schemas.SinistreCreate, db: Session = Depends(get_db
     if not (contrat.date_debut <= data.date_survenance <= contrat.date_fin):
         raise HTTPException(400, "Le sinistre est survenu en dehors de la période de couverture")
 
-    # exclude_none : la base applique alors ses valeurs par défaut (date de déclaration, statut)
+   )
     sinistre = models.Sinistre(**data.model_dump(exclude_none=True))
     db.add(sinistre)
     try:

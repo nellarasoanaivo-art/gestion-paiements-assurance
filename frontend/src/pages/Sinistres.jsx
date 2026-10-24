@@ -79,7 +79,7 @@ export default function Sinistres() {
   const resteAIndemniser = (s) =>
     s.montant_estime != null ? Math.max(0, Number(s.montant_estime) - totalVerse(s.id_sinistre)) : null;
 
-  // ---------- Déclaration ----------
+
   const contratsDuClient = contrats.filter(
     (c) => String(c.id_client) === form.id_client && c.statut === "ACTIF"
   );
@@ -124,7 +124,7 @@ export default function Sinistres() {
     }
   };
 
-  // ---------- Statut ----------
+
   const changerStatut = async (id, statut) => {
     setErreur("");
     setSucces("");
@@ -136,7 +136,7 @@ export default function Sinistres() {
     }
   };
 
-  // ---------- Indemnisation ----------
+
   const ouvrirIndemnisation = (s) => {
     const reste = resteAIndemniser(s);
     setAIndemniser(s);

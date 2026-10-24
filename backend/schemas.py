@@ -22,7 +22,6 @@ def capitaliser(texte: str) -> str:
                   texte.strip())
 
 
-# ---------- Clients ----------
 class ClientCreate(BaseModel):
     nom: str = Field(min_length=1, max_length=100)
     prenom: str = Field(min_length=1, max_length=100)
@@ -117,7 +116,7 @@ class ClientOut(BaseModel):
     date_creation: Optional[datetime] = None
 
 
-# ---------- Produits ----------
+
 class TypeAssuranceOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id_type_assurance: int
@@ -143,7 +142,7 @@ class ProduitOut(BaseModel):
     types: list[str]
 
 
-# ---------- Contrats ----------
+
 Periodicite = Literal["MENSUELLE", "TRIMESTRIELLE", "SEMESTRIELLE", "ANNUELLE"]
 
 
@@ -187,7 +186,7 @@ class EcheanceDetail(EcheanceOut):
     reste: Decimal
 
 
-# ---------- Paiements ----------
+
 class ModePaiementOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id_mode_paiement: int
@@ -218,7 +217,7 @@ class PaiementDetail(BaseModel):
     numero_quittance: Optional[str] = None
 
 
-# ---------- Sinistres ----------
+
 StatutSinistre = Literal["DECLARE", "EN_EXPERTISE", "ACCEPTE", "REFUSE", "CLOTURE"]
 
 
@@ -272,7 +271,6 @@ class IndemnisationOut(BaseModel):
     id_utilisateur: int
 
 
-# ---------- Authentification ----------
 class LoginIn(BaseModel):
     email: str
     mot_de_passe: str

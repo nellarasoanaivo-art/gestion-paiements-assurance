@@ -12,7 +12,7 @@ const VIDE = {
   email: "", telephone: "", adresse: "", ville: "", code_postal: "",
 };
 
-// NOM en majuscules ; Prénoms : première lettre de chaque mot en majuscule
+
 const capitaliser = (v) =>
   v.replace(/[^\s\-']+/g, (m) => m[0].toUpperCase() + m.slice(1).toLowerCase());
 

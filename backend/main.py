@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Lecture : tout utilisateur connecté. Écriture : administrateur et gestionnaire.
+
 gestion = [Depends(ecriture_reservee("ADMIN", "GESTIONNAIRE"))]
 
 app.include_router(auth.router)

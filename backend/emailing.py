@@ -11,7 +11,6 @@ load_dotenv()
 def envoyer_email(destinataire: str, sujet: str, corps: str) -> None:
     hote = os.getenv("SMTP_HOST")
 
-    # Mode développement : pas de SMTP, on affiche le message dans le terminal
     if not hote:
         print("\n" + "=" * 70)
         print("EMAIL (SMTP non configuré : mode développement)")
@@ -44,5 +43,5 @@ def envoyer_email(destinataire: str, sujet: str, corps: str) -> None:
                 if login:
                     serveur.login(login, mot_de_passe)
                 serveur.send_message(message)
-    except Exception as e:  # l'erreur reste dans le terminal, jamais envoyée au client
+    except Exception as e:  
         print("ERREUR ENVOI EMAIL :", e, flush=True)

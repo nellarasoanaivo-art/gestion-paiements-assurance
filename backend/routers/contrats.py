@@ -41,7 +41,7 @@ def generer_echeances(db: Session, id_contrat: int, date_debut: date, date_fin: 
 
     montant = (prime_annuelle / par_an).quantize(Decimal("0.01"))
     montants = [montant] * len(dates)
-    if len(dates) == par_an:  # année complète : le total égale exactement la prime
+    if len(dates) == par_an:  
         montants[-1] = prime_annuelle - montant * (par_an - 1)
 
     for d, m in zip(dates, montants):
@@ -61,13 +61,13 @@ def contrat_a_des_sinistres(db: Session, id_contrat: int) -> bool:
               .first()) is not None
 
 
-# ---------- Types d'assurance ----------
+
 @router.get("/types-assurance", response_model=list[schemas.TypeAssuranceOut])
 def lister_types(db: Session = Depends(get_db)):
     return db.query(models.TypeAssurance).order_by(models.TypeAssurance.libelle).all()
 
 
-# ---------- Produits ----------
+
 def produit_vers_dict(p: models.ProduitAssurance) -> dict:
     types = sorted(p.types, key=lambda t: t.id_type_assurance)
     return {
@@ -82,7 +82,7 @@ def produit_vers_dict(p: models.ProduitAssurance) -> dict:
 
 
 def charger_types(db: Session, ids: list[int]) -> list[models.TypeAssurance]:
-    ids = list(dict.fromkeys(ids))  # sans doublons, ordre conservé
+    ids = list(dict.fromkeys(ids))  
     trouves = {t.id_type_assurance: t for t in
                db.query(models.TypeAssurance)
                  .filter(models.TypeAssurance.id_type_assurance.in_(ids)).all()}
@@ -140,7 +140,7 @@ def supprimer_produit(id_produit: int, db: Session = Depends(get_db)):
     db.commit()
 
 
-# ---------- Contrats ----------
+
 @router.get("/contrats", response_model=list[schemas.ContratOut])
 def lister_contrats(db: Session = Depends(get_db)):
     return db.query(models.Contrat).order_by(models.Contrat.id_contrat).all()

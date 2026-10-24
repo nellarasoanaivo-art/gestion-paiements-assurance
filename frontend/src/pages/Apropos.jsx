@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 
-// ---------- Géométrie du diagramme ----------
-const L = 230;          // largeur d'une table
+
+const L = 230;          
 const H_ENTETE = 34;
 const H_LIGNE = 22;
 const H_PIED = 8;
@@ -18,7 +18,7 @@ const GROUPES = {
   trace: { nom: "Traçabilité", couleur: "#475569" },
 };
 
-// colonnes : [nom, type, clés]  (clés : PK, FK, UQ séparées par une virgule)
+
 const TABLES = [
   { nom: "role", groupe: "securite", x: 20, y: 20,
     colonnes: [["id_role", "SERIAL", "PK"], ["libelle", "VARCHAR(50)", "UQ"]] },
@@ -73,7 +73,6 @@ const TABLES = [
       ["description", "TEXT", ""], ["prime_reference", "NUMERIC(12,2)", ""]] },
 ];
 
-// de.col référence vers.cible  (de = table fille « N », vers = table parente « 1 »)
 const RELATIONS = [
   { de: "utilisateur", col: "id_role", vers: "role", cible: "id_role" },
   { de: "paiement", col: "id_echeance", vers: "echeance", cible: "id_echeance" },

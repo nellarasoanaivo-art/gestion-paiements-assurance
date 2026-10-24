@@ -28,7 +28,7 @@ def sortie(u: models.Utilisateur) -> dict:
     }
 
 
-# ---------- Connexion ----------
+
 @router.post("/auth/login")
 def connexion(data: schemas.LoginIn, db: Session = Depends(get_db)):
     utilisateur = (db.query(models.Utilisateur)
@@ -53,14 +53,14 @@ def moi(utilisateur: models.Utilisateur = Depends(get_current_user)):
     return sortie(utilisateur)
 
 
-# ---------- Création de compte (public) ----------
+
 @router.post("/auth/inscription", status_code=201)
 def inscription(data: schemas.InscriptionIn, db: Session = Depends(get_db)):
     email = data.email.strip().lower()
     if db.query(models.Utilisateur).filter(func.lower(models.Utilisateur.email) == email).first():
         raise HTTPException(409, "Cet email est déjà utilisé")
 
-    # Rôle le plus restreint ; l'administrateur l'ajustera à la validation
+
     role = db.query(models.Role).filter(models.Role.libelle == "CAISSIER").first()
     if not role:
         raise HTTPException(500, "Rôle par défaut introuvable")
@@ -82,7 +82,7 @@ def inscription(data: schemas.InscriptionIn, db: Session = Depends(get_db)):
                        "votre compte avant votre première connexion."}
 
 
-# ---------- Mot de passe oublié (public) ----------
+
 @router.post("/auth/mot-de-passe-oublie")
 def mot_de_passe_oublie(data: schemas.MotDePasseOublieIn, taches: BackgroundTasks,
                         db: Session = Depends(get_db)):
@@ -103,7 +103,7 @@ def mot_de_passe_oublie(data: schemas.MotDePasseOublieIn, taches: BackgroundTask
         taches.add_task(envoyer_email, utilisateur.email,
                         "Réinitialisation de votre mot de passe", corps)
 
-    # Même réponse dans tous les cas : on ne révèle pas quelles adresses existent
+
     return {"message": "Si un compte actif correspond à cette adresse, "
                        "un lien de réinitialisation vient d'être envoyé."}
 
@@ -116,7 +116,6 @@ def reinitialiser(data: schemas.ReinitialisationIn, db: Session = Depends(get_db
     return {"message": "Votre mot de passe a été modifié."}
 
 
-# ---------- Gestion des utilisateurs (administrateur) ----------
 @router.get("/roles", response_model=list[schemas.RoleOut], dependencies=[Depends(exiger_admin)])
 def lister_roles(db: Session = Depends(get_db)):
     return db.query(models.Role).order_by(models.Role.id_role).all()

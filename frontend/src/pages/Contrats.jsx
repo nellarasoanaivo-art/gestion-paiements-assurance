@@ -21,7 +21,7 @@ const ajouterMois = (iso, n) => {
   return cible;
 };
 
-// Date de fin = date de début + durée de la périodicité − 1 jour
+
 const calculerFin = (debut, periodicite) => {
   const fin = ajouterMois(debut, MOIS[periodicite]);
   fin.setUTCDate(fin.getUTCDate() - 1);
@@ -73,19 +73,19 @@ export default function Contrats() {
     return contrats.filter((c) =>
       (c.numero_contrat + " " + nomClient(c.id_client)).toLowerCase().includes(t)
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [contrats, clients, recherche]);
 
   const changer = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  // Choix du produit : la prime annuelle se remplit automatiquement
+
   const changerProduit = (e) => {
     const id = e.target.value;
     const p = produits.find((x) => String(x.id_produit) === id);
     setForm((f) => ({ ...f, id_produit: id, prime_annuelle: p ? String(Number(p.prime_base)) : "" }));
   };
 
-  // Choix de la périodicité : la date de fin se recalcule si la date de début existe
+ 
   const changerPeriodicite = (e) => {
     const periodicite = e.target.value;
     setForm((f) => ({
@@ -94,7 +94,7 @@ export default function Contrats() {
     }));
   };
 
-  // Choix de la date de début : la date de fin se remplit automatiquement
+
   const changerDebut = (e) => {
     const date_debut = e.target.value;
     setForm((f) => ({
@@ -127,7 +127,7 @@ export default function Contrats() {
     setFormulaireOuvert(true);
   };
 
-  // Récapitulatif calculé en direct
+
   const prime = Number(form.prime_annuelle) || 0;
   const parAn = form.periodicite ? PAR_AN[form.periodicite] : 0;
   const montantEcheance = parAn && prime ? prime / parAn : 0;

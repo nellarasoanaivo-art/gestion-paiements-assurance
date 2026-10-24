@@ -29,7 +29,7 @@ export default function Produits() {
 
   const changer = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  // Le prix se calcule automatiquement : somme des prix de référence des types cochés
+ 
   const basculerType = (id) => {
     const ids = form.ids_types.includes(id)
       ? form.ids_types.filter((x) => x !== id)

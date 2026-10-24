@@ -27,7 +27,7 @@ schema_bearer = HTTPBearer(auto_error=False)
 
 
 def hacher_mot_de_passe(mot_de_passe: str) -> str:
-    # bcrypt ne lit que les 72 premiers octets
+   
     return bcrypt.hashpw(mot_de_passe.encode("utf-8")[:72], bcrypt.gensalt()).decode("utf-8")
 
 
@@ -47,7 +47,7 @@ def creer_token(utilisateur: models.Utilisateur) -> str:
     return jwt.encode(charge, SECRET_KEY, algorithm=ALGORITHME)
 
 
-# ---------- Réinitialisation du mot de passe ----------
+
 def _empreinte(utilisateur: models.Utilisateur) -> str:
     """Change dès que le mot de passe change : le lien devient alors inutilisable."""
     return hashlib.sha256(utilisateur.mot_de_passe.encode("utf-8")).hexdigest()[:16]
@@ -82,7 +82,7 @@ def utilisateur_depuis_token_reinitialisation(token: str, db: Session) -> models
     return utilisateur
 
 
-# ---------- Utilisateur courant et rôles ----------
+
 def get_current_user(
     identifiants: HTTPAuthorizationCredentials = Depends(schema_bearer),
     db: Session = Depends(get_db),

@@ -32,7 +32,7 @@ const PAGES = [
   { chemin: "/a-propos", titre: "À propos", icone: "info", Composant: Apropos },
 ];
 
-// Sur mobile, chaque cellule affiche le titre de sa colonne (tableaux en cartes)
+
 function etiqueterTableaux() {
   document.querySelectorAll(".tableau-conteneur table").forEach((table) => {
     const entetes = [...table.querySelectorAll("thead th")].map((th) => th.textContent.trim());
@@ -53,7 +53,7 @@ export default function App() {
   const [menuOuvert, setMenuOuvert] = useState(false);
   const estAdmin = utilisateur?.role === "ADMIN";
 
-  // Nombre de comptes à valider, actualisé à chaque changement de page
+
   useEffect(() => {
     if (!estAdmin) return;
     api("/utilisateurs")
@@ -65,7 +65,7 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  // Étiquettes des cellules pour l'affichage mobile
+
   useEffect(() => {
     if (!utilisateur) return;
     let attente = 0;
@@ -82,7 +82,7 @@ export default function App() {
     };
   }, [utilisateur]);
 
-  // Menu mobile : touche Échap et blocage du défilement de la page
+ 
   useEffect(() => {
     document.body.classList.toggle("menu-ouvert", menuOuvert);
     const surTouche = (e) => {

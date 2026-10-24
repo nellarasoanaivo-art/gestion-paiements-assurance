@@ -7,7 +7,7 @@ const compact = (v) => {
   return String(Math.round(v));
 };
 
-// ---------- Barres verticales (12 mois) ----------
+
 export function GrapheBarres({ donnees, avecIndemnites }) {
   const L = 760, H = 320;
   const m = { haut: 16, bas: 44, gauche: 64, droite: 12 };
@@ -63,7 +63,7 @@ export function GrapheBarres({ donnees, avecIndemnites }) {
   );
 }
 
-// ---------- Anneau (répartition) ----------
+
 export function GrapheAnneau({ segments, centre, sousCentre }) {
   const total = segments.reduce((s, x) => s + x.valeur, 0);
   const R = 70;
@@ -104,7 +104,7 @@ export function GrapheAnneau({ segments, centre, sousCentre }) {
   );
 }
 
-// ---------- Barres horizontales ----------
+
 export function BarresHorizontales({ elements }) {
   const max = Math.max(1, ...elements.map((e) => e.valeur));
   return (

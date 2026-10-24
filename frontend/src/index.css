@@ -23,7 +23,7 @@ body {
 h1, h2, h3, h4, h5 { margin: 0; }
 small { color: var(--texte-doux); font-size: .88rem; }
 
-/* ---------- Structure ---------- */
+
 .app { display: flex; min-height: 100vh; }
 
 .menu-lateral {
@@ -88,7 +88,7 @@ button.btn-deconnexion-icone:hover:not(:disabled) { background: #fee2e2; color: 
 .contenu { padding: 1.8rem; max-width: 1400px; width: 100%; min-width: 0; }
 .ecran-centre { min-height: 100vh; display: flex; align-items: center; justify-content: center; color: var(--texte-doux); }
 
-/* ---------- En-têtes et cartes ---------- */
+
 .entete-page { display: flex; justify-content: space-between; align-items: center;
                gap: 1rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
 .entete-page h2 { font-size: 1.8rem; }
@@ -106,7 +106,7 @@ button.btn-deconnexion-icone:hover:not(:disabled) { background: #fee2e2; color: 
 .barre-outils.filtres label { display: flex; align-items: center; gap: .5rem; font-weight: 600; color: #334155; }
 .espace-haut { margin-top: 1.2rem; }
 
-/* ---------- Tableaux ---------- */
+
 .tableau-conteneur { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 table { width: 100%; border-collapse: collapse; background: var(--carte); }
 th {
@@ -120,7 +120,7 @@ td.vide { text-align: center; color: var(--texte-doux); padding: 2rem; }
 td.actions { white-space: nowrap; }
 td.actions button { margin: 0 .35rem .25rem 0; }
 
-/* ---------- Formulaires ---------- */
+
 input, select, textarea {
   font: inherit; padding: .65rem .8rem; border: 1.5px solid #cbd5e1; border-radius: 9px;
   background: #fff; color: var(--texte); max-width: 100%;
@@ -164,7 +164,7 @@ input:disabled, select:disabled { background: #f1f5f9; color: #94a3b8; }
   border: 1px solid var(--bordure); border-radius: 12px; padding: 1rem; margin-bottom: 1rem;
 }
 
-/* ---------- Boutons ---------- */
+
 button {
   font: inherit; font-weight: 600; padding: .65rem 1.2rem; border: 1px solid transparent;
   border-radius: 9px; background: var(--primaire); color: #fff; cursor: pointer;
@@ -184,7 +184,7 @@ button.petit { padding: .4rem .85rem; font-size: .92rem; }
             border-radius: 9px; background: var(--primaire); color: #fff; text-decoration: none; font-weight: 600; }
 .btn-lien:hover { background: var(--primaire-fonce); }
 
-/* ---------- Badges ---------- */
+
 .badge { display: inline-block; padding: .2rem .75rem; border-radius: 999px; font-size: .88rem; font-weight: 700; }
 .ton-succes { background: #dcfce7; color: #166534; }
 .ton-attention { background: #fef3c7; color: #92400e; }
@@ -198,7 +198,7 @@ button.petit { padding: .4rem .85rem; font-size: .92rem; }
 }
 select.petit { padding: .35rem .55rem; font-size: .95rem; }
 
-/* ---------- Alertes ---------- */
+
 .alerte, .erreur, .succes, .info {
   padding: .85rem 1.1rem; border-radius: 10px; margin-bottom: 1rem; font-size: 1rem;
   font-weight: 500; border: 1px solid transparent;
@@ -207,7 +207,7 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
 .alerte-succes, .succes { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
 .alerte-info, .info { background: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
 
-/* ---------- Fenêtres modales ---------- */
+
 .modal-fond {
   position: fixed; inset: 0; background: rgba(15, 23, 42, .6); display: flex;
   align-items: center; justify-content: center; padding: 1rem; z-index: 100;
@@ -223,7 +223,7 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
 .modal-corps { padding: 1.5rem; }
 .modal-actions { display: flex; justify-content: flex-end; gap: .7rem; margin-top: 1.6rem; flex-wrap: wrap; }
 
-/* ---------- Connexion / inscription ---------- */
+
 .ecran-login {
   min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem;
   background: linear-gradient(135deg, #0f172a, #1e3a8a);
@@ -246,7 +246,7 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
 }
 .bouton-lien:hover { background: var(--primaire-fonce); }
 
-/* ---------- Tableau de bord ---------- */
+
 .grille-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
                 gap: 1.1rem; margin-bottom: 1.6rem; }
 .stat { background: var(--carte); border: 1px solid var(--bordure); border-radius: 14px;
@@ -290,7 +290,7 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
 .barres-h-piste { height: 12px; background: #e2e8f0; border-radius: 999px; overflow: hidden; }
 .barres-h-barre { height: 100%; background: linear-gradient(90deg, #3b82f6, #1d4ed8); border-radius: 999px; }
 
-/* ---------- Facture et quittance ---------- */
+
 .facture { border: 1px solid var(--bordure); border-radius: 10px; padding: 1.6rem; background: #fff; position: relative; }
 .facture-entete { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
                   border-bottom: 3px solid var(--primaire); padding-bottom: 1rem; margin-bottom: 1.2rem; }
@@ -317,7 +317,7 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
                    font-size: 1.25rem; font-weight: 700; text-align: right; }
 .quittance-annulee { color: #dc2626; font-weight: 700; text-align: center; margin: .8rem 0 0; }
 
-/* ---------- À propos et MPD ---------- */
+
 .apropos-grille { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.2rem; }
 .liste-simple { margin: 0 0 1rem; padding-left: 1.2rem; display: grid; gap: .5rem; }
 .liste-simple.regles { margin: 0; gap: .8rem; }
@@ -382,11 +382,7 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
 .cle-FK { background: #dbeafe; color: #1e40af; }
 .cle-UQ { background: #ede9fe; color: #5b21b6; }
 
-/* =====================================================================
-   RESPONSIVE
-   ===================================================================== */
 
-/* Petits écrans d'ordinateur et tablettes en paysage */
 @media (max-width: 1150px) {
   .menu-lateral { width: 250px; }
   .menu-lateral nav a { font-size: 1.05rem; padding: .8rem .9rem; }
@@ -398,7 +394,7 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
   .facture-blocs { grid-template-columns: 1fr; }
 }
 
-/* Tablettes et mobiles : le menu devient un tiroir */
+
 @media (max-width: 900px) {
   .menu-lateral {
     position: fixed; top: 0; left: 0; bottom: 0; height: auto; z-index: 90;
@@ -416,7 +412,7 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
   .entete-page h2 { font-size: 1.55rem; }
 }
 
-/* Mobiles : tableaux en cartes, fenêtres en bas d'écran */
+
 @media (max-width: 720px) {
   .utilisateur-texte { display: none; }
   .carte { padding: 1rem; border-radius: 12px; }
@@ -476,14 +472,14 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
   .mpd-chiffres { grid-template-columns: 1fr; }
 }
 
-/* ---------- Impression (quittance, facture) ---------- */
+
 @media print {
   #root { display: none !important; }
   .modal-fond { position: static; background: none; padding: 0; display: block; }
   .modal { box-shadow: none; width: 100%; max-height: none; overflow: visible; border-radius: 0; }
   .modal-entete, .modal-actions { display: none; }
 }
-/* ---------- Ajustements mobile ---------- */
+
 @media (max-width: 720px) {
   html { font-size: 15px; }
   input, select, textarea { font-size: 16px; }
@@ -515,11 +511,11 @@ select.petit { padding: .35rem .55rem; font-size: .95rem; }
   .onglets button { padding: .5rem .8rem; }
 }
 
-/* ===== Avatar seul (initiales) ===== */
+
 .barre-droite { margin-left: auto; display: flex; align-items: center; gap: .8rem; }
 .avatar { width: 44px; height: 44px; font-size: 1rem; cursor: default; }
 
-/* ===== Menu hamburger : tablettes et téléphones ===== */
+
 button.btn-menu { display: none; }
 
 @media (max-width: 1024px) {

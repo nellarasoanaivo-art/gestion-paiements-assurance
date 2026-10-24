@@ -33,14 +33,14 @@ def tableau_de_bord(utilisateur: models.Utilisateur = Depends(get_current_user),
     gestion = utilisateur.role.libelle in ("ADMIN", "GESTIONNAIRE")
     valide = models.Paiement.statut == "VALIDE"
 
-    # ---------- Encaissements ----------
+  
     total_encaisse = db.query(func.coalesce(func.sum(models.Paiement.montant), 0)).filter(valide).scalar()
     nb_paiements = db.query(func.count(models.Paiement.id_paiement)).filter(valide).scalar()
     debut_mois = datetime(aujourdhui.year, aujourdhui.month, 1)
     encaisse_mois = (db.query(func.coalesce(func.sum(models.Paiement.montant), 0))
                        .filter(valide, models.Paiement.date_paiement >= debut_mois).scalar())
 
-    # ---------- Série des 12 derniers mois ----------
+  
     mois = _mois_precedents(12)
     debut_serie = datetime(mois[0][0], mois[0][1], 1)
 
@@ -63,7 +63,7 @@ def tableau_de_bord(utilisateur: models.Utilisateur = Depends(get_current_user),
         "indemnise": indemnise_par_mois[(a, m)] if gestion else None,
     } for a, m in mois]
 
-    # ---------- Échéances ----------
+   
     payes = dict(db.query(models.Paiement.id_echeance, func.sum(models.Paiement.montant))
                    .filter(valide).group_by(models.Paiement.id_echeance).all())
     lignes = (db.query(models.Echeance, models.Contrat, models.Client)
@@ -99,7 +99,7 @@ def tableau_de_bord(utilisateur: models.Utilisateur = Depends(get_current_user),
 
     retards.sort(key=lambda r: r["date_echeance"])
 
-    # ---------- Modes de paiement ----------
+  
     modes = (db.query(models.ModePaiement.libelle,
                       func.sum(models.Paiement.montant),
                       func.count(models.Paiement.id_paiement))
@@ -109,7 +109,7 @@ def tableau_de_bord(utilisateur: models.Utilisateur = Depends(get_current_user),
                .group_by(models.ModePaiement.libelle)
                .order_by(func.sum(models.Paiement.montant).desc()).all())
 
-    # ---------- Derniers paiements encaissés ----------
+   
     derniers = (db.query(models.Paiement, models.Contrat, models.Client, models.ModePaiement)
                   .join(models.Echeance, models.Paiement.id_echeance == models.Echeance.id_echeance)
                   .join(models.Contrat, models.Echeance.id_contrat == models.Contrat.id_contrat)
@@ -120,7 +120,7 @@ def tableau_de_bord(utilisateur: models.Utilisateur = Depends(get_current_user),
                   .order_by(models.Paiement.date_paiement.desc(), models.Paiement.id_paiement.desc())
                   .limit(6).all())
 
-    # ---------- Indicateurs réservés à la gestion ----------
+    
     clients = contrats_actifs = sinistres_en_cours = indemnites = None
     if gestion:
         clients = db.query(func.count(models.Client.id_client)).scalar()
